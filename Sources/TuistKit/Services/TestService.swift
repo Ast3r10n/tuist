@@ -76,6 +76,7 @@ final class TestService {
         deviceName: String?,
         osVersion: String?,
         skipUITests: Bool,
+        derivedDataPath: AbsolutePath?,
         resultBundlePath: AbsolutePath?,
         retryCount: Int
     ) async throws {
@@ -136,6 +137,7 @@ final class TestService {
                     configuration: configuration,
                     version: version,
                     deviceName: deviceName,
+                    derivedDataPath: derivedDataPath,
                     resultBundlePath: resultBundlePath,
                     retryCount: retryCount
                 )
@@ -159,6 +161,7 @@ final class TestService {
                     configuration: configuration,
                     version: version,
                     deviceName: deviceName,
+                    derivedDataPath: derivedDataPath,
                     resultBundlePath: resultBundlePath,
                     retryCount: retryCount
                 )
@@ -196,6 +199,7 @@ final class TestService {
         configuration: String?,
         version: Version?,
         deviceName: String?,
+        derivedDataPath: AbsolutePath?,
         resultBundlePath: AbsolutePath?,
         retryCount: Int
     ) async throws {
@@ -218,7 +222,7 @@ final class TestService {
             scheme: scheme.name,
             clean: clean,
             destination: destination,
-            derivedDataPath: nil,
+            derivedDataPath: derivedDataPath,
             resultBundlePath: resultBundlePath,
             arguments: buildGraphInspector.buildArguments(
                 project: buildableTarget.project,

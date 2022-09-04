@@ -54,6 +54,12 @@ struct TestCommand: AsyncParsableCommand {
     var skipUITests: Bool = false
 
     @Option(
+        name: [.long, .customShort("D")],
+        help: "Path where derived data for the build will be saved."
+    )
+    var derivedDataPath: String?
+
+    @Option(
         name: [.long, .customShort("T")],
         help: "Path where test result bundle will be saved."
     )
@@ -82,6 +88,12 @@ struct TestCommand: AsyncParsableCommand {
             deviceName: device,
             osVersion: os,
             skipUITests: skipUITests,
+            derivedDataPath: derivedDataPath.map {
+                AbsolutePath(
+                    $0,
+                    relativeTo: FileHandler.shared.currentPath
+                )
+            },
             resultBundlePath: resultBundlePath.map {
                 AbsolutePath(
                     $0,
